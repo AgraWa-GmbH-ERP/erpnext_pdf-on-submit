@@ -4,4 +4,6 @@ from frappe.model.document import Document
 
 
 class PDFonSubmitSettings(Document):
-	pass
+	def validate(self):
+		for enabled_doctype in self.enabled_for:
+			enabled_doctype.validate_condition()

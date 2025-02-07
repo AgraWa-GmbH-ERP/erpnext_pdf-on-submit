@@ -8,6 +8,7 @@ from frappe.model.naming import _format_autoname
 from frappe.realtime import publish_realtime
 from frappe.translate import print_language
 from frappe.utils.weasyprint import PrintFormatGenerator
+from pdf_on_submit.safe_exec import get_context
 
 
 def attach_pdf(doc, event=None):
@@ -17,6 +18,11 @@ def attach_pdf(doc, event=None):
 		enabled_doctype = enabled_doctypes[0]
 	else:
 		return
+
+	if enabled_doctype.condition:
+		condition_met = frappe.safe_eval(enabled_doctype.condition, None, get_context(doc.as_dict()))
+		if not condition_met:
+			return
 
 	auto_name = enabled_doctype.auto_name
 	print_format = (
