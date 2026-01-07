@@ -148,7 +148,7 @@ def get_pdf_data(doctype, name, print_format: None, letterhead: None):
 	if print_format and print_format != "Standard":
 		pdf_generator = frappe.db.get_value("Print Format", print_format, "pdf_generator")
 		if pdf_generator == "chrome":
-			return get_pdf(print_format, html, options=None, output=None, pdf_generator=pdf_generator)
+			return get_pdf(print_format, html, options={}, output=None, pdf_generator=pdf_generator)
 
 	return frappe.utils.pdf.get_pdf(html)
 
