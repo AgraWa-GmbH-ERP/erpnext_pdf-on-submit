@@ -11,6 +11,7 @@ from frappe.realtime import publish_realtime
 from frappe.translate import print_language
 from frappe.utils.data import evaluate_filters
 from frappe.utils.weasyprint import PrintFormatGenerator
+from print_designer.pdf_generator.pdf import get_pdf
 
 
 def attach_pdf(doc, event=None):
