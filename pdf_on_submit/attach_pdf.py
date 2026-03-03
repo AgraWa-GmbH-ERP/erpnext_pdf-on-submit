@@ -22,6 +22,8 @@ def attach_pdf(doc, event=None):
 		return
 
 	for dt_settings in enabled_doctypes:
+		if getattr(dt_settings, "document_type", None) != doc.doctype:
+			continue
 		process_enabled_doctype(doc, dt_settings, settings.create_pdf_in_background)
 
 
